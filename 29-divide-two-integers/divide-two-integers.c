@@ -4,9 +4,11 @@ int divide(int dividend, int divisor) {
     long long ldevisor=llabs((long long)divisor);
     int sign=((dividend<0)^(divisor<0)?-1:1);
    long long res=0;
+    
     while(ldevidend>=ldevisor){
        long long temp=ldevisor;
        long long multiple=1; 
+        
         while(ldevidend>=(temp<<1)){
             temp<<=1;
             multiple <<=1;
@@ -19,5 +21,6 @@ int divide(int dividend, int divisor) {
     
     if (res > INT_MAX) return INT_MAX;
     if (res < INT_MIN) return INT_MIN;
+    
     return (int)res;
 }
