@@ -16,7 +16,7 @@ int divide(int dividend, int divisor) {
     }
      res = sign * res;
 
-    // Clamp result within 32-bit signed int bounds
+    
     if (res > INT_MAX) return INT_MAX;
     if (res < INT_MIN) return INT_MIN;
     return (int)res;
