@@ -10,4 +10,4 @@ class Solution(object):
                 jumps+=1
                 end=farthest
         return jumps 
-__import__("atexit").register(lambda: open("display_runtime.txt", "w").write("0"))                 
+             
