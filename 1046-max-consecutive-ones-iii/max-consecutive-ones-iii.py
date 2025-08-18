@@ -14,4 +14,4 @@ class Solution(object):
             if right-left+1>maxlen:
                 maxlen=right-left+1
         return maxlen
-__import__("atexit").register(lambda: open("display_runtime.txt", "w").write("0"))  
+ 
