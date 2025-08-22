@@ -15,6 +15,4 @@ class Solution(object):
             if lastmin!=-1 and lastmax!=-1:
                 res+=max(0,min(lastmin,lastmax)-lastinvalid)
         return res   
-__import__("atexit").register(lambda: open("display_runtime.txt", "w").write("0"))                       
-
-        
+ 
