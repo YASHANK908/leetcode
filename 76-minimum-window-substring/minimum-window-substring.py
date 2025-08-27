@@ -1,26 +1,30 @@
+from collections import Counter
 class Solution(object):
     def minWindow(self, s, t):
-        c_t=Counter(t)
-        window_count={}
-        need=len(c_t)
-        req=0
-        left= 0
+        need=Counter(t)
+        window={}
+
+        left,right=0,0
+        valid,start=0,0
         minlen=float('inf')
-        res=""
-        for right in range(len(s)):
-            char=s[right]
-            window_count[char]=window_count.get(char,0)+1
-            if char in c_t and window_count[char]==c_t[char]:
-                req+=1
-            while req==need:
-                if right-left+1<minlen:
-                    minlen=right-left+1
-                    res=s[left:right+1] 
-                leftchar=s[left]
-                window_count[leftchar]-=1
-                if leftchar in c_t and window_count[leftchar]<c_t[leftchar]:
-                    req-=1
-                left+=1    
-        return res if minlen!=float('inf') else "" 
+        while right < len(s):
+            c=s[right]
+            right+=1
+            if c in need:
+                window[c]=window.get(c,0)+1
+                if window[c]==need[c]:
+                    valid+=1
+
+            while valid == len(need):
+                if right-left<minlen:
+                    start=left
+                    minlen=right-left
+                d= s[left]
+                left+=1
+                if d in need:
+                    if window[d]==need[d]:
+                        valid-=1
+                    window[d]-=1
+        return "" if minlen==float('inf') else s[start:start+minlen]                        
          
         
