@@ -1,6 +1,6 @@
 class Solution(object):
     def solveSudoku(self, board):
-        FULL_MASK = (1 << 9) - 1  # 9 bits for digits 1-9
+        FULL_MASK = (1 << 9) - 1  
         rows = [0] * 9
         cols = [0] * 9
         boxes = [0] * 9
@@ -9,7 +9,7 @@ class Solution(object):
         def box_index(r, c):
             return (r // 3) * 3 + (c // 3)
 
-        # Initialize bitmasks and list of empty cells
+         
         for r in range(9):
             for c in range(9):
                 if board[r][c] == '.':
@@ -25,13 +25,13 @@ class Solution(object):
             if not empties:
                 return True
 
-            # Choose the cell with minimum candidates (MRV heuristic)
+           
             best_idx = -1
             best_count = 10
             best_mask = 0
             for i, (r, c) in enumerate(empties):
                 mask = FULL_MASK & ~(rows[r] | cols[c] | boxes[box_index(r, c)])
-                count = bin(mask).count('1')  # ✅ works in all Python versions
+                count = bin(mask).count('1')   
                 if count < best_count:
                     best_count = count
                     best_idx = i
