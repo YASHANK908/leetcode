@@ -1,16 +1,16 @@
 class Solution(object):
     def rearrangeArray(self, nums):
+        i,j=0,1
+        n=len(nums)
         res=[0]*len(nums)
-        pos_index=0
-        neg_index=1
         for num in nums:
             if num>0:
-                res[pos_index]=num
-                pos_index+=2
+                res[i]=num
+                i+=2
             elif num<0:
-                res[neg_index]=num
-                neg_index+=2
-        return res        
+                res[j]=num
+                j+=2
 
-
-        
+           
+        return res    
+         
