@@ -1,18 +1,20 @@
-class Solution(object):
-    def countSubarrays(self, nums, k):
-        maxelement=max(nums)
-        left=0
-        res=0
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) ->int:
+        max_val=max(nums)
+        count_max=0
         n=len(nums)
-        count=0
+        ans=0
+        left=0
         for right in range(n):
-            if nums[right]==maxelement:
-                count+=1
-            while count>=k:
-                res+=n-right
-                if nums[left]==maxelement:
-                    count-=1
+            if nums[right]==max_val:
+                count_max+=1
+            while count_max>=k:
+                ans+=(n-right)
+                if nums[left]==max_val:
+                    count_max-=1
                 left+=1
-        return res            
+        return ans
+
 
         
+    
