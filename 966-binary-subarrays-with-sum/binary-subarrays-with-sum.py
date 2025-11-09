@@ -1,12 +1,18 @@
-class Solution(object):
-    def numSubarraysWithSum(self, nums, goal):
-        prefixsum=0
-        hashmap={0:1}
-        count=0
-        for num in nums:
-            prefixsum+=num
-            if prefixsum-goal in hashmap:
-                count+=hashmap[prefixsum-goal]
-            hashmap[prefixsum]=hashmap.get(prefixsum,0)+1
-        return count    
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        def atmost(x):
+            if x<0:
+                return 0
+            left=0
+            Sum=0
+            count=0
+
+            for right in range(len(nums)):
+                Sum+=nums[right]
+                while Sum>x:
+                    Sum-=nums[left]
+                    left+=1
+                count+=(right-left+1) 
+            return count  
+        return atmost(goal)-atmost(goal-1)     
         
