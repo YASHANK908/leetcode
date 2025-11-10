@@ -1,18 +1,17 @@
-class Solution(object):
-    def countSubarrays(self, nums, minK, maxK):
-        res=0
-        lastinvalid=-1
-        lastmin=lastmax=-1
-
-        for i,num in enumerate(nums):
-            if num<minK or num>maxK:
+class Solution:
+    def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+        lastinvalid,lastmax,lastmin=-1,-1,-1
+        ans=0
+        for i in range(len(nums)):
+            if nums[i]<minK or nums[i]>maxK:
                 lastinvalid=i
-                lastmin,lastmax=-1,-1
-            if num==minK:
+                
+            if nums[i]==minK:
                 lastmin=i
-            if num==maxK:
+            if nums[i]==maxK:
                 lastmax=i
-            if lastmin!=-1 and lastmax!=-1:
-                res+=max(0,min(lastmin,lastmax)-lastinvalid)
-        return res   
- 
+
+            if lastmin!=-1 and lastmin!=-1:
+                ans+=max(0,min(lastmax,lastmin)-lastinvalid)
+        return ans             
+        
