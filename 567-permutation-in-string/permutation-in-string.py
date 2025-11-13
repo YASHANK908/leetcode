@@ -1,23 +1,25 @@
- 
-class Solution(object):
-    def checkInclusion(self, s1, s2):
-        if len(s1)>len(s2):
-            return False
-        s1_count=[0]*26
-        window=[0]*26
-        for i in range(len(s1)):
-            s1_count[ord(s1[i])-ord('a')]+=1
-        for i in range(len(s1)):
-            window[ord(s2[i])-ord('a')]+=1
-        if window==s1_count:
-            return True   
+from collections import Counter
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        need=Counter(s1)
+        window=Counter()
+        req_len=len(s1)
+        left=0
+        for right in range(len(s2)):
+            window[s2[right]]+=1
+            while right-left+1>req_len:
+                window[s2[left]]-=1
+                if window[s2[left]]==0:
+                    del window[s2[left]]
+                left+=1
+            if right-left+1==req_len:
+                matched=True
 
-        for i in range(len(s1),len(s2)):
-            window[ord(s2[i])-ord('a')]+=1
-            window[ord(s2[i-len(s1)])-ord('a')]-=1
-            if window==s1_count:
-                return True
-        return False        
-
-
+                for c in need:
+                    if window[c]!=need[c]:
+                        matched=False
+                        break
+                if matched:
+                    return True
+        return False            
         
