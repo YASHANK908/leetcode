@@ -1,25 +1,22 @@
-class Solution(object):
-    def findAnagrams(self, s, p):
+from collections import Counter
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        need=Counter(p)
+        window=Counter()
+
         res=[]
-        if len(p)>len(s):
-            return []
-        p_count=[0]*26
-        s_count=[0]*26
+        req_len=len(p)
+        left=0
 
-        for c in p:
-            p_count[ord(c)-ord('a')]+=1
-        for i in range(len(p)):
-            s_count[ord(s[i])-ord('a')]+=1
-        if s_count==p_count:
-            res.append(0)
-
-
-        for i in range(len(p),len(s)):
-            s_count[ord(s[i])-ord('a')]+=1
-            s_count[ord(s[i-len(p)])-ord('a')]-=1 
-            if s_count==p_count:
-                res.append(i-len(p)+1)
-
-        return res                   
+        for right in range(len(s)):
+            window[s[right]]+=1
+            while right-left+1>req_len:
+                window[s[left]]-=1
+                if window[s[left]]==0:
+                    del window[s[left]]
+                left+=1
+            if right-left+1==req_len and window==need:
+                res.append(left)
+        return res    
 
         
