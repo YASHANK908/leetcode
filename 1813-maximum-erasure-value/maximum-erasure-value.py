@@ -1,18 +1,21 @@
 class Solution:
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
-        s=set()
+        freq={}
         left=0
         Sum=0
         maxsum=0
+
         for right in range(len(nums)):
-            while nums[right] in s:
-                s.remove(nums[left])
+            
+            while nums[right] in freq:
                 Sum-=nums[left]
+                freq[nums[left]]-=1
+                if freq[nums[left]]==0:
+                    del freq[nums[left]]
                 left+=1
-                
-            s.add(nums[right])
+            freq[nums[right]]=1
             Sum+=nums[right]
             maxsum=max(maxsum,Sum)
-            
-        return maxsum        
+        return maxsum
+
         
