@@ -1,24 +1,23 @@
 from collections import deque
-class Solution(object):
-    def maximumRobots(self, chargeTimes, runningCosts, budget):
+class Solution:
+    def maximumRobots(self, chargeTimes: List[int], runningCosts: List[int], budget: int) -> int:
         n=len(chargeTimes)
+        left=0
+        sum=0
+        ans=0
         dq=deque()
-        runsum=0
-        l=0
-        res=0
-        for r in range(n):
-            runsum+=runningCosts[r]
-            while dq and chargeTimes[dq[-1]]<chargeTimes[r]:
-                dq.pop()
-            dq.append(r)
+        for right in range(n):
+            sum+=runningCosts[right]
 
-            while dq and(chargeTimes[dq[0]]+(r-l+1)*runsum)>budget:
-                if dq[0]==l:
+            while dq and chargeTimes[dq[-1]]<=chargeTimes[right]:
+                dq.pop()
+            dq.append(right)
+
+            while dq and (chargeTimes[dq[0]]+(right-left+1)*sum)>budget:
+                sum-=runningCosts[left]
+                if dq[0]==left:
                     dq.popleft()
-                runsum-=runningCosts[l] 
-                l+=1
-            res=max(res,r-l+1)       
-        return res        
-        
-        
+                left+=1
+            ans=max(ans,right-left+1)    
+        return ans
         
