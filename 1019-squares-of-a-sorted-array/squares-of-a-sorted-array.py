@@ -1,14 +1,18 @@
-class Solution(object):
-    def sortedSquares(self, nums):
-        left,right=0,len(nums)-1
-        res=[0]*len(nums)
-        pos=len(nums)-1
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        n=len(nums)
+        res=[-1]*n
+        ind=n-1
+        left,right=0,n-1
+
         while left<=right:
-            if abs(nums[left])>abs(nums[right]):
-                res[pos]=nums[left]**2
+            if abs(nums[left])>=abs(nums[right]):
+                res[ind]=nums[left]**2
                 left+=1
             else:
-                res[pos]=nums[right]**2
+                res[ind]=nums[right]**2
                 right-=1
-            pos-=1
-        return res        
+            ind-=1
+        return res
+
+        
