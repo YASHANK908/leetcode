@@ -1,12 +1,9 @@
-class Solution(object):
-    def findMaxAverage(self, nums, k):
-        windowsum=sum(nums[:k])
-        maxsum=windowsum
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        window_sum=sum(nums[:k])
+        maxav=window_sum/k
 
         for i in range(k,len(nums)):
-            windowsum+=nums[i]-nums[i-k]
-            if windowsum>maxsum:
-                maxsum=windowsum
-        return maxsum/float(k)
-__import__("atexit").register(lambda: open("display_runtime.txt", "w").write("0"))        
- 
+            window_sum+=nums[i]-nums[i-k]
+            maxav=max(maxav,window_sum/k)
+        return maxav
