@@ -1,18 +1,21 @@
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
         def isvowel(c):
-            return c in {'a','e','i','o','u'}
-        maxvowel=0
-        vowel=0
+            if c=='a' or c=='e' or c=='i' or c=='o' or c=='u':
+                return True
+            else:
+                return False
         left=0
-        for i in range(len(s)):
-            if isvowel(s[i]):
-                vowel+=1
-            if (i-left+1)==k:
-                maxvowel=max(maxvowel,vowel)
+        count=0
+        maxcount=0
+        for right in range(len(s)):
+            if isvowel(s[right]):
+                count+=1
+            if right-left+1==k:
+                maxcount=max(maxcount,count)
+            if right-left+1>=k:
                 if isvowel(s[left]):
-                    vowel-=1
+                    count-=1
                 left+=1
-        return maxvowel            
-
+        return maxcount
         
