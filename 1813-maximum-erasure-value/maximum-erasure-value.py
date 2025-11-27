@@ -1,14 +1,12 @@
 class Solution:
     def maximumUniqueSubarray(self, nums: List[int]) -> int:
         freq={}
-        left=0
         Sum=0
         maxsum=0
-
+        left=0
         for right in range(len(nums)):
-            
             while nums[right] in freq:
-                Sum-=nums[left]
+                Sum-=nums[left] 
                 freq[nums[left]]-=1
                 if freq[nums[left]]==0:
                     del freq[nums[left]]
@@ -17,5 +15,6 @@ class Solution:
             Sum+=nums[right]
             maxsum=max(maxsum,Sum)
         return maxsum
-
+            
+            
         
