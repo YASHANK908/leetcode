@@ -12,14 +12,7 @@ class Solution:
                 if window[s2[left]]==0:
                     del window[s2[left]]
                 left+=1
-            if right-left+1==req_len:
-                matched=True
-
-                for c in need:
-                    if window[c]!=need[c]:
-                        matched=False
-                        break
-                if matched:
-                    return True
-        return False            
+            if right-left+1==req_len and window==need:
+                return True
+        return False
         
