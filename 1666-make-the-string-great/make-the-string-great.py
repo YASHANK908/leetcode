@@ -1,10 +1,11 @@
-class Solution(object):
-    def makeGood(self, s):
+class Solution:
+    def makeGood(self, s: str) -> str:
         stack=[]
-        for ch in s:
-            if stack and abs(ord(stack[-1])-ord(ch))==32:
+
+        for c in s:
+            if stack and abs(ord(stack[-1])-ord(c))==32:
                 stack.pop()
             else:
-                stack.append(ch)
-        return "".join(stack)            
+                stack.append(c)
+        return "".join(stack)
         
