@@ -2,21 +2,31 @@ from collections import deque
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph=[[] for _ in range(numCourses)]
-        inDegree=[0]*numCourses
 
-        for u,v in prerequisites:
-            graph[v].append(u)
-            inDegree[u]+=1
+        indegree=[0]*numCourses
 
-        q= deque([i for i in range(numCourses) if inDegree[i]==0])
+        for a,b in prerequisites:
+            graph[b].append(a)
+            indegree[a]+=1
+        
+        queue=deque()
+
+        for i in range(numCourses):
+            if indegree[i]==0:
+                queue.append(i)
+        
         order=[]
+        while queue:
+            curr=queue.popleft()
+            order.append(curr)
 
-        while q:
-            course=q.popleft() 
-            order.append(course)
-            for nei in graph[course]:
-                inDegree[nei]-=1
-                if inDegree[nei]==0:
-                    q.append(nei)
-        return order if len(order)==numCourses else []               
+            for nxt in graph[curr]:
+                indegree[nxt]-=1
+                if indegree[nxt]==0:
+                    queue.append(nxt)
+        
+        return order if len(order)==numCourses else []
+            
+        
+
         
