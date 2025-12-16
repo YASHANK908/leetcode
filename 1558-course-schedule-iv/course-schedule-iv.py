@@ -2,23 +2,34 @@ from collections import defaultdict,deque
 class Solution:
     def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
         graph=defaultdict(list)
-        inDegree=[0]*numCourses
-        prereq=[set() for _ in range(numCourses)]
+        indegree=[0]*numCourses
 
         for u,v in prerequisites:
             graph[u].append(v)
-            inDegree[v]+=1
+            indegree[v]+=1
+        
+        queue=deque()
 
-        q= deque([i for i in range(numCourses) if inDegree[i]==0])
+        for i in range(numCourses):
+            if indegree[i]==0:
+                queue.append(i)
+        
+        topo=[]
 
-        while q:
-            node=q.popleft()
+        while queue:
+            node=queue.popleft()
+            topo.append(node)
             for nei in graph[node]:
-                prereq[nei].update(prereq[node])
-                prereq[nei].add(node) 
-                inDegree[nei]-=1
-                if inDegree[nei]==0:
-                    q.append(nei)
-        return [u in prereq[v] for u,v in queries]               
+                indegree[nei]-=1
+                if indegree[nei]==0:
+                    queue.append(nei)
+        
+        reachable =[set() for _ in range(numCourses)]
 
+        for u in reversed(topo):
+            for v in graph[u]:
+                reachable[u].add(v)
+                reachable[u].update(reachable[v])
+        
+        return[v in reachable[u] for u,v in queries]
         
