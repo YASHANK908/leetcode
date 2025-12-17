@@ -1,36 +1,33 @@
-class UnionFind:
-    def  __init__(self,n):
-        self.parent= list(range(n))
-        self.rank=[0]*n
-    def find(self,x):
-        if self.parent[x]!=x:
-            self.parent[x]=self.find(self.parent[x])
-        return self.parent[x] 
-    def union(self,x,y):
-        px,py=self.find(x),self.find(y)
-        if px==py:
-            return False
-        if self.rank[px]<self.rank[py]:
-            self.parent[px]=py
-        elif self.rank[py]<self.rank[px]:
-            self.parent[py]=px
-        else:
-            self.parent[py]=px
-            self.rank[px]+=1
-        return True    
-    
-                       
-
 class Solution:
     def makeConnected(self, n: int, connections: List[List[int]]) -> int:
         if len(connections)<n-1:
             return -1
-
-        uf =UnionFind(n)
-        components=n
-
+        parent =[i for i in range(n)]
+        rank=[0]*n
+        
+        def find(x):
+            if x!=parent[x]:
+                parent[x]=find(parent[x])
+            return parent[x]
+        
+        def union(x,y):
+            px,py=find(x),find(y)
+            if px==py:
+                return
+            if rank[px]<rank[py]:
+                parent[px]=py
+            elif rank[py]<rank[px]:
+                parent[py]=px
+            else:
+                parent[py]=px
+                rank[px]+=1
+        
         for u,v in connections:
-            if uf.union(u,v):
-                components-=1
-        return components-1        
+            union(u,v)
+        
+        components=sum(1 for i in range(n) if find(i)==i)
+
+        return components-1
+
+
         
