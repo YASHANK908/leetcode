@@ -7,16 +7,16 @@
 class Solution:
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
         self.prev=None
-        self.mindiff=float('inf')
+        self.ans=float('inf')
         def inorder(node):
             if not node:
-                return
+                return 
             inorder(node.left)
             if self.prev is not None:
-                self.mindiff=min(self.mindiff,node.val-self.prev)
+                self.ans=min(self.ans,node.val-self.prev)
             self.prev=node.val
             inorder(node.right)
         inorder(root)
-        return self.mindiff            
-
+        return self.ans
+            
         
