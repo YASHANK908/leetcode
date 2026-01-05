@@ -1,12 +1,13 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        n=len(nums)
         res=[]
-        for mask in range(1<<n):
-            subset=[]
-            for j in range(n):
-                if mask&(1<<j):
-                    subset.append(nums[j])
-            res.append(subset)
+
+        def backtrack(index,curr):
+            res.append(curr[:])
+            for i in range(index,len(nums)):
+                curr.append(nums[i])
+                backtrack(i+1,curr)
+                curr.pop()
+        backtrack(0,[])
         return res
         
