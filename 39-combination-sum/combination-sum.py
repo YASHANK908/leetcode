@@ -3,16 +3,17 @@ class Solution:
         res=[]
         candidates.sort()
 
-        def backtrack(start,path,total):
-            if total==target:
-                res.append(path[:])
+        def backtrack(start,remaining,path):
+            if remaining==0:
+                res.append(path.copy())
                 return
-            if total>target:
-                return
+            
             for i in range(start,len(candidates)):
+                if candidates[i]>remaining:
+                    break
                 path.append(candidates[i])
-                backtrack(i,path,total+candidates[i])  
-                path.pop() 
-        backtrack(0,[],0)
-        return res         
+                backtrack(i,remaining-candidates[i],path)
+                path.pop()
+        backtrack(0,target,[])
+        return res
         
