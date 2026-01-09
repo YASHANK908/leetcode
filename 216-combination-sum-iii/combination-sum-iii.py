@@ -1,18 +1,21 @@
 class Solution:
     def combinationSum3(self, k: int, n: int) -> List[List[int]]:
         res=[]
+        path=[]
 
-        def backtrack(start,path,total):
-            if len(path)>k and total>n:
+        def dfs(start,k_left,sum_left):
+            if sum_left==0 and k_left==0:
+                res.append(path.copy())
                 return
-            if len(path)==k and total==n:
-                res.append(path[:])
+            
+            if k_left<0 or sum_left<0:
                 return
-
             for i in range(start,10):
+                if i>sum_left:
+                    break
                 path.append(i)
-                backtrack(i+1,path,total+i)
+                dfs(i+1,k_left-1,sum_left-i)
                 path.pop()
-        backtrack(1,[],0)
-        return res                
+        dfs(1,k,n)
+        return res
         
