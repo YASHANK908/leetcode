@@ -3,14 +3,13 @@ class Solution:
         nge={}
         stack=[]
 
-        for num in nums2:
-            while stack and num>stack[-1]:
-                nge[stack.pop()]=num
-            
-            stack.append(num)
-
+        for current in nums2:
+            while stack and current>stack[-1]:
+                smaller=stack.pop()
+                nge[smaller]=current
+            stack.append(current)
         while stack:
             nge[stack.pop()]=-1
+        
         return [nge[x] for x in nums1]
-            
         
