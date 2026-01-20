@@ -1,12 +1,15 @@
-class Solution(object):
-    def nextGreaterElements(self, nums):
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
         n=len(nums)
-        res=[-1]*len(nums)
+        ans=[-1]*n
         stack=[]
+
         for i in range(2*n):
-            while stack and nums[i%n]>nums[stack[-1]]:
-                res[stack.pop()]=nums[i%n]
+            idx=i%n
+            while stack and nums[idx]>nums[stack[-1]]:
+                topidx=stack.pop()
+                ans[topidx]=nums[idx]
             if i<n:
-                stack.append(i)
-        return res            
+                stack.append(idx)
+        return ans
         
