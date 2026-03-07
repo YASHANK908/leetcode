@@ -1,13 +1,13 @@
-class Solution(object):
-    def subarraySum(self, nums, k):
-        prefixsum=0
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
         hashmap={0:1}
+        pr_sum=0
         count=0
-        for num in nums:
-            prefixsum+=num
-            if prefixsum-k in hashmap:
-                count+=hashmap[prefixsum-k]
-            hashmap[prefixsum]=hashmap.get(prefixsum,0)+1
-        return count    
 
+        for i in range(len(nums)):
+            pr_sum+=nums[i]
+            if pr_sum-k in hashmap:
+                count+=hashmap[pr_sum-k]
+            hashmap[pr_sum]=hashmap.get(pr_sum,0)+1
+        return count
         
