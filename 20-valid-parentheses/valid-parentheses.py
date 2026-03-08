@@ -1,15 +1,21 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        charmaps={')':'(',']':'[','}':'{'}
+        
         stack=[]
-        mapping={')':'(','}':'{',']':'['}
-
-        for char in s:
-            if char in mapping.values():
-                stack.append(char)
-            elif char in mapping:
-                if not stack or stack[-1] !=mapping[char]:
+        for i in range(len(s)):
+            if s[i] in charmaps.values():
+                stack.append(s[i])
+            elif s[i] in charmaps :
+                if not stack or stack[-1]!=charmaps[s[i]]:
                     return False
                 stack.pop()
         return not stack
+                
 
+
+            
+                    
+            
+             
         
