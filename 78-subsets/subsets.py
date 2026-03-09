@@ -1,7 +1,8 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
+        
         res=[]
-
+        
         def backtrack(index,curr):
             res.append(curr[:])
             for i in range(index,len(nums)):
@@ -10,4 +11,5 @@ class Solution:
                 curr.pop()
         backtrack(0,[])
         return res
+
         
