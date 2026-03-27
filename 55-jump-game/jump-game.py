@@ -1,15 +1,12 @@
-class Solution(object):
-    def canJump(self, nums):
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
         maxreach=0
-        n= len(nums)
-
-        for i in range(n):
+        for i in range(len(nums)):
             if i>maxreach:
                 return False
             maxreach=max(maxreach,i+nums[i])
-            if maxreach>=n-1:
+            if maxreach>=len(nums)-1:
                 return True
-        return True          
-__import__("atexit").register(lambda: open("display_runtime.txt", "w").write("0"))            
-            
+       
+
         
