@@ -3,14 +3,16 @@ class Solution:
         if not points:
             return 0
         
-        points.sort(key=lambda x:x[1])
-
-        arrow_end=points[0][1]
+        points.sort(key= lambda x:x[1])
+        
         arrows=1
+        curr_end=points[0][1]
 
         for start,end in points[1:]:
-            if start>arrow_end:
+            if start<=curr_end:
+                continue
+            else:
                 arrows+=1
-                arrow_end=end
+                curr_end=end
         return arrows
         
