@@ -1,24 +1,29 @@
-class Solution(object):
-    def setZeroes(self, matrix):
-        rows,cols=len(matrix),len(matrix[0])
-        firstrow_zero=any(matrix[0][j]==0 for j in range(cols))
-        firstcol_zero= any(matrix[i][0]==0 for i in range(rows))
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
 
-        for i in range(1,rows):
-            for j in range(1,cols):
+        m,n=len(matrix),len(matrix[0])
+
+        firstrowzero=any(matrix[0][j]==0 for j in range(n))
+        firstcolumnzero=any(matrix[i][0]==0 for i in range(m))
+
+        for i in range(1,m):
+            for j in range(1,n):
                 if matrix[i][j]==0:
                     matrix[i][0]=0
                     matrix[0][j]=0
-
-        for i in range(1,rows):
-            for j in range(1,cols):
+        for i in range(1,m):
+            for j in range(1,n):
                 if matrix[i][0]==0 or matrix[0][j]==0:
                     matrix[i][j]=0
-
-        if firstrow_zero:
-            for j in range(cols):
+        if firstrowzero:
+            for j in range(n):
                 matrix[0][j]=0
-        if firstcol_zero:
-            for i in range(rows):
+        if firstcolumnzero:
+            for i in range(m):
                 matrix[i][0]=0
-        return matrix                
+
+
+
+
+        
+        
