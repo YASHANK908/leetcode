@@ -1,11 +1,11 @@
+from collections import defaultdict
 import heapq
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        graph=[[] for _ in range(n+1)]
+        graph=defaultdict(list)
 
         for u,v,w in times:
             graph[u].append((v,w))
-        
         dist=[float('inf')]*(n+1)
         dist[k]=0
 
@@ -13,18 +13,14 @@ class Solution:
 
         while heap:
             time,node=heapq.heappop(heap)
-            
             if time>dist[node]:
                 continue
             
-            for nei,weight in graph[node]:
-                new_time=time+weight
-
-                if new_time < dist[nei]:
-                    dist[nei]=new_time
-                    heapq.heappush(heap,(new_time,nei))
+            for nei,w in graph[node]:
+                if time+w<dist[nei]:
+                    dist[nei]=time+w
+                    heapq.heappush(heap,(dist[nei],nei))
+        maxtime=max(dist[1:])
+        return maxtime if maxtime!=float('inf') else -1 
         
-        ans=max(dist[1:])
-        return ans if ans!=float('inf') else -1
-
         
