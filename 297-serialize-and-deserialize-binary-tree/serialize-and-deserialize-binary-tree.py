@@ -18,12 +18,12 @@ class Codec:
             dfs(node.right)
         dfs(root)
         return ",".join(res)
-
-        
+     
+     
 
     def deserialize(self, data):
-        self.i=0
         vals=data.split(",")
+        self.i=0
         def dfs():
             if vals[self.i]=="N":
                 self.i+=1
@@ -34,6 +34,8 @@ class Codec:
             node.right=dfs()
             return node
         return dfs()
+        
+        
         
 
 # Your Codec object will be instantiated and called as such:
