@@ -14,6 +14,7 @@ class Solution:
             if depth==len(sums):
                 sums.append(0)
                 counts.append(0)
+                
             sums[depth]+=node.val
             counts[depth]+=1
             dfs(node.left,depth+1)
