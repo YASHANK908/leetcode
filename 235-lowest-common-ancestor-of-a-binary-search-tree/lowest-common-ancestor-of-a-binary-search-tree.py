@@ -14,4 +14,5 @@ class Solution:
                 root=root.right
             else:
                 return root
-        
+       
+       
