@@ -1,25 +1,25 @@
 class Solution:
     def splitArray(self, nums: List[int], k: int) -> int:
-        def cansplit(mid):
+        def cansplit(maxsum):
+            subarrays=1
             currsum=0
-            split=1
             for num in nums:
-                if currsum+num<=mid:
-                    currsum+=num
-                else:
-                    split+=1
+                if currsum+num>maxsum:
+                    subarrays+=1
                     currsum=num
-            return split<=k
-        low,high=max(nums),sum(nums)
+                else:
+                    currsum+=num
+            return subarrays<=k
         
-
-        while low<high:
-            mid=(low+high)//2
-        
+        left,right=max(nums),sum(nums)
+        ans=right
+        while left<=right:
+            mid= left+(right-left)//2
             if cansplit(mid):
-                high=mid
+                ans=mid
+                right=mid-1
             else:
-                low=mid+1
+                left=mid+1
+        return ans
 
-        return low
         
