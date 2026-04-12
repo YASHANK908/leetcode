@@ -1,18 +1,19 @@
-import heapq
-class Solution(object):
-    def minRefuelStops(self, target, startFuel, stations):
+class Solution:
+    def minRefuelStops(self, target: int, startFuel: int, stations: List[List[int]]) -> int:
         maxheap=[]
         fuel=startFuel
-        ans=0
         prev=0
-        for pos,cap in stations +[(target,0)]:
-            fuel-=(pos-prev)
-            while maxheap and fuel<0:
+        stops=0
+        stations.append([target,0])
+        for position,gas in stations:
+            fuel-=(position-prev)
+            while fuel<0:
+                if not maxheap:
+                    return -1
                 fuel+=-heapq.heappop(maxheap)
-                ans+=1
-            if fuel<0:
-                return -1
-            heapq.heappush(maxheap,-cap)
-            prev=pos
-        return ans    
+                stops+=1
+            
+            heapq.heappush(maxheap,-gas)
+            prev=position
+        return stops
         
