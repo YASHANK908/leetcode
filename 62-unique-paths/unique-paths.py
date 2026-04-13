@@ -1,9 +1,9 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        dp=[1]*n
-
-        for _ in range(1,m):
-            for j in range(1,n):
-                dp[j]+=dp[j-1]
-        return dp[n-1] 
+        N=m+n-2
+        r=min(m-1,n-1)
+        res=1
+        for i in range(1,r+1):
+            res=res*(N-r+i)//i
+        return res
         
