@@ -1,30 +1,31 @@
 from collections import Counter
-class Solution(object):
-    def minWindow(self, s, t):
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        if not s or not t:
+            return ""
         need=Counter(t)
         window={}
-
-        left,right=0,0
-        valid,start=0,0
-        minlen=float('inf')
-        while right < len(s):
+        have,need_count=0,len(need)
+        res=[-1,-1]
+        reslen=float('inf')
+        left=0
+        for right in range(len(s)):
             c=s[right]
-            right+=1
-            if c in need:
-                window[c]=window.get(c,0)+1
-                if window[c]==need[c]:
-                    valid+=1
+            window[c]=window.get(c,0)+1
 
-            while valid == len(need):
-                if right-left<minlen:
-                    start=left
-                    minlen=right-left
-                d= s[left]
+            if c in need and window[c]==need[c]:
+                have+=1
+            
+            while have==need_count:
+                if (right-left+1)<reslen:
+                    res=[left,right]
+                    reslen=right-left+1
+                window[s[left]]-=1
+                if s[left] in need and window[s[left]]<need[s[left]]:
+                    have-=1
                 left+=1
-                if d in need:
-                    if window[d]==need[d]:
-                        valid-=1
-                    window[d]-=1
-        return "" if minlen==float('inf') else s[start:start+minlen]                        
-         
+            
+            l,r=res
+        return s[l:r+1] if reslen!=float('inf') else ""
+
         
