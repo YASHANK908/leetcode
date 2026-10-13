@@ -1,19 +1,17 @@
-class Solution(object):
-    def applyOperations(self, nums):
-        n=len(nums)
-
-        for i in range(n-1):
+class Solution:
+    def applyOperations(self, nums: list[int]) -> list[int]:
+        for i in range(len(nums)-1):
             if nums[i]==nums[i+1]:
                 nums[i]*=2
                 nums[i+1]=0
-        pos=0
-        for i in range(n):
-            if nums[i]!=0:
-                nums[i],nums[pos]=nums[pos],nums[i]
-                pos+=1
-        return nums        
+        
+        left=0
 
-
-
-
+        for right in range(len(nums)):
+            if nums[right]!=0:
+                nums[left]=nums[right]
+                left+=1
+        for i in range(left,len(nums)):
+            nums[i]=0
+        return nums
         
