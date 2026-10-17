@@ -1,12 +1,11 @@
-class Solution(object):
-    def sortArrayByParity(self, nums):
-        left,right=0,len(nums)-1
-        while left<right:
-            if nums[left]%2==0:
-                left+=1
-            elif nums[right]%2==1:
-                right-=1
-            else:
+class Solution:
+    def sortArrayByParity(self, nums: list[int]) -> list[int]:
+        left=0
+        right=len(nums)
+
+        for right in range(len(nums)):
+            if nums[right]%2==0:
                 nums[left],nums[right]=nums[right],nums[left]
-        return nums                
+                left+=1
+        return nums
         
