@@ -1,5 +1,5 @@
-class Solution(object):
-    def sortArrayByParityII(self, nums):
+class Solution:
+    def sortArrayByParityII(self, nums: list[int]) -> list[int]:
         i,j=0,1
         n=len(nums)
         while i<n and j<n:
@@ -11,5 +11,4 @@ class Solution(object):
                 nums[i],nums[j]=nums[j],nums[i]
                 i+=2
                 j+=2
-        return nums                
-        
+        return nums    
