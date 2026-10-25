@@ -1,15 +1,11 @@
 from collections import Counter
-class Solution(object):
-    def isAnagram(self, s, t):
-        if len(s)!=len(t):
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        c_s=Counter(s)
+        c_t=Counter(t)
+        
+        if c_s==c_t:
+            return True
+        else:
             return False
-        count =[0]*26
-
-        for i in range(len(s)):
-            count[ord(s[i])-ord('a')]+=1
-            count[ord(t[i])-ord('a')]-=1
-
-        for c in count:
-            if c!=0:
-                return False
-        return True                
+        
