@@ -1,15 +1,15 @@
-class Solution(object):
-    def isIsomorphic(self, s, t):
-        if len(s) != len(t):
-            return False
-        map_c={}
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        map_s={}
         map_t={}
-        for mc,mt in zip(s,t):
-            if mc in map_c and map_c[mc]!=mt:
+
+        for a,b in zip(s,t):
+            if a in map_s and map_s[a]!=b:
                 return False
-            if mt in map_t and map_t[mt]!=mc:
+            if b in map_t and map_t[b]!=a:
                 return False
-            map_c[mc]=mt
-            map_t[mt]=mc
-        return True    
+            
+            map_s[a]=b
+            map_t[b]=a
+        return True
         
