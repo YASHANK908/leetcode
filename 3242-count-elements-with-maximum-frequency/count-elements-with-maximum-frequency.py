@@ -5,9 +5,9 @@ class Solution:
         for num in nums:
             count[num]=count.get(num,0)+1
         max_freq=max(count.values())
-        numbers=[]
+        result=0
         for num in nums:
             if count[num]==max_freq:
-                numbers.append(num)
+                result+=1
         
-        return len(numbers)
+        return result
