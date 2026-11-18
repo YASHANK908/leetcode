@@ -1,13 +1,14 @@
+from collections import Counter
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
-        count={}
-
-        for ch in s:
-            count[ch]=count.get(ch,0)+1
-        
-        for ch in t:
-            if count.get(ch,0)>0:
-                count[ch]-=1
+        map1=Counter(s)
+         
+        for word in t:
+            if map1[word]>0:
+                map1[word]-=1
             else:
-                return ch
+                return word
+
+
+
         
