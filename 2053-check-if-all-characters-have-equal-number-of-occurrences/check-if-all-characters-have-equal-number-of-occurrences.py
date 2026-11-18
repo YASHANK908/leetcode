@@ -2,6 +2,9 @@ from collections import Counter
 class Solution:
     def areOccurrencesEqual(self, s: str) -> bool:
         count=Counter(s)
-    
-        return min(count.values())==max(count.values())
+
+        if len(set(count.values()))==1:
+            return True
+        else:
+            return False
         
