@@ -1,13 +1,18 @@
+from collections import Counter
 class Solution:
     def intersect(self, nums1: list[int], nums2: list[int]) -> list[int]:
-        count={}
-        res=[]
-        for num in nums1:
-            count[num]=count.get(num,0)+1
-        
+        count=Counter(nums1)
+        result=[]
         for num in nums2:
-            if count.get(num,0)>0:
-                res.append(num)
+            if count[num]>0:
+                result.append(num)
                 count[num]-=1
-        return res
+        return result
+
+
+
+
+
+
+        
         
